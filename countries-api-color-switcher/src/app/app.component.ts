@@ -16,11 +16,27 @@ import { error } from 'console';
 })
 export class AppComponent implements OnInit {
   title = 'countries-api-color-switcher';
+ 
+  // Array to store countries infos
+  countries: { 
+    name: string; 
+    flag: File; 
+    population: number; 
+    region: string; 
+    capital: string;
+    continents: string;
+    borders: string[];
+    languages: string[];
+    subregion: string;
+    tld: string;
+    currencies: string[]
+  }[] = []; 
 
   constructor(private http: HttpClient){}
 
   ngOnInit(): void {
-    const apiUrl = 'https://restcountries.com/v3.1/all?fields=name,flags';
+    /*
+    const apiUrl = 'https://restcountries.com/v3.1/all?fields=name,flags,continents,region,population,borders,capital,languages,subregion,tld,currencies';
     this.http.get(apiUrl).subscribe(
       (response) => {
         console.log(response);
@@ -28,6 +44,6 @@ export class AppComponent implements OnInit {
       (error) => {
         console.log('erro: ',error);
       }
-    );
+    );*/
   }
 }

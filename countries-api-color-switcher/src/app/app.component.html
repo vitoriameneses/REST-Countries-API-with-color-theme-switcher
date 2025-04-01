@@ -4,5 +4,18 @@
 </mat-toolbar>
 
 <div class="countries-container">
-
+  <div class="search-filters"></div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="country of countries">
+      <div class="flag">
+        [flag image]
+      </div>
+      <div class="infos-country">
+        <h4>[country name]</h4>
+        <p><span>Population: </span>[population]</p>
+        <p><span>Region: </span>[region]</p>
+        <p><span>Capital: </span>[capital]</p>
+      </div>
+    </div>
+  </div>
 </div>
