@@ -1,0 +1,67 @@
+
+.toolbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button{
+    background: none;
+    border: 0.5px solid transparent;
+    border-radius: 16px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s background-color ease-in-out;
+
+    svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    &:hover{
+        cursor: pointer;
+        background-color: hsl(0, 0%, 86%);
+    }
+}
+
+.countries-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
+    gap: 5px;
+    width: 90%;
+}
+
+.grid-item{
+    border: .5px solid transparent;
+    border-radius: 12px;
+    margin: 8px;
+    margin-top: 18px;
+    box-shadow: 0px 0px 50px -22px rgba(97, 97, 97, 0.38);
+    display: flex;
+    flex-direction: column;
+
+    .flag {
+        img {
+            width: 100%;
+        }
+    }
+
+    .infos-country{
+        margin-left: 10px;
+    }
+
+    &:hover{
+        cursor: pointer;
+    }
+}
