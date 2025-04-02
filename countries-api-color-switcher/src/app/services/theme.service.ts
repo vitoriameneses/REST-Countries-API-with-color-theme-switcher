@@ -1,24 +1,42 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  // Observable to check the state of the theme
-  private isDarkModeSubject = new BehaviorSubject<boolean>(this.getInitialTheme());
+  private isDarkModeSubject = new BehaviorSubject<boolean>(false);
   isDarkMode$ = this.isDarkModeSubject.asObservable();
 
-  constructor() {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    const initialTheme = this.getInitialTheme();
+    this.isDarkModeSubject.next(initialTheme);
+    this.applyTheme(initialTheme);
+  }
 
-  // Get initial theme based of localStorage
   private getInitialTheme(): boolean {
-    return localStorage.getItem('theme') === 'dark';
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false; // padrão caso esteja no SSR ou Vite
   }
 
   toggleTheme(isDarkMode: boolean): void {
     this.isDarkModeSubject.next(isDarkMode);
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }
+    this.applyTheme(isDarkMode);
+  }
+
+  private applyTheme(isDarkMode: boolean): void {
+    const classList = this.document.documentElement.classList;
+    classList.remove('dark-theme', 'light-theme');
+    classList.add(isDarkMode ? 'dark-theme' : 'light-theme');
   }
 
   get currentTheme(): boolean {

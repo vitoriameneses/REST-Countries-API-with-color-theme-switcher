@@ -1,40 +1,72 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
+@use 'sass:map';
 @use '@angular/material' as mat;
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200..1000&display=swap');
 
-// Define the theme object.
-$countries-api-color-switcher-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  density: (
-    scale: 0,
-  )
-));
+$main-font: 'Nunito Sans', sans-serif;
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-:root {
-  @include mat.all-component-themes($countries-api-color-switcher-theme);
+$light-theme-colors: (
+  primary-background: hsl(0, 0%, 98%),
+  secondary-background: hsl(0, 0%, 100%),
+  text-color: hsl(200, 15%, 8%),
+  secondary-text-color: #4d4c4c,
+  border-color: #adadad,
+  chip-text-color: #1a1a1a
+);
+
+$dark-theme-colors: (
+  primary-background: hsl(207, 26%, 17%),
+  secondary-background: hsl(209, 23%, 22%),
+  text-color: hsl(0, 0%, 100%),
+  secondary-text-color: #cccccc,
+  border-color: #a7a7a78c,
+  chip-text-color: #f0f0f0
+);
+
+@mixin theme-colors($theme) {
+  background-color: map-get($theme, primary-background);
+  color: map-get($theme, text-color);
+
+  input, select, textarea {
+    background-color: map-get($theme, primary-background);
+    color: map-get($theme, text-color);
+    border: 1px solid map-get($theme, border-color);
+  }
+
+  ::placeholder {
+    color: map-get($theme, secondary-text-color);
+  }
+
+  button {
+    color: map-get($theme, text-color);
+    transition: 0.2s background-color ease-in-out;
+
+    &:hover{
+      cursor: pointer;
+      background-color: map-get($theme, secondary-background);
+    }
+  }
+
+  .grid-item{
+    background-color: map-get($theme, secondary-background);
+  }
+
+  .mat-mdc-chip-set {
+    --mdc-chip-label-text-color: map-get($theme, chip-text-color);
+  }
 }
 
-// Comment out the line below if you want to use the pre-defined typography utility classes.
-// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
-// @include mat.typography-hierarchy($countries-api-color-switcher-theme);
+.light-theme {
+  @include theme-colors($light-theme-colors);
+}
 
-// Comment out the line below if you want to use the deprecated `color` inputs.
-// @include mat.color-variants-backwards-compatibility($countries-api-color-switcher-theme);
-/* You can add global styles to this file, and also import other style files */
+.dark-theme {
+  @include theme-colors($dark-theme-colors);
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: $main-font;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

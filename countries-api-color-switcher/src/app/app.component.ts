@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { response } from 'express';
 import { error } from 'console';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'countries-api-color-switcher';
+  isDarkMode = false;
  
   // Array to store countries infos
   countries: { 
@@ -34,9 +36,12 @@ export class AppComponent implements OnInit {
     currencies: string[]
   }[] = []; 
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, public themeService: ThemeService){}
 
   ngOnInit(): void {
+    this.themeService.isDarkMode$.subscribe(isDark => {
+      this.isDarkMode = isDark;
+    });
     
     const apiUrl = 'https://restcountries.com/v3.1/all?fields=name,flags,continents,region,population,borders,capital,languages,subregion,tld,currencies';
     this.http.get(apiUrl).subscribe(
@@ -62,5 +67,10 @@ export class AppComponent implements OnInit {
         console.log('erro: ', error);
       }
     );
+  }
+
+  toggleTheme(): void {
+    const isDark = !this.themeService.currentTheme;
+    this.themeService.toggleTheme(isDark);
   }
 }

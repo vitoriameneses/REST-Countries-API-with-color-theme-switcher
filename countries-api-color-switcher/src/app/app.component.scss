@@ -14,16 +14,10 @@ button{
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    transition: 0.2s background-color ease-in-out;
 
     svg {
         width: 15px;
         height: 15px;
-    }
-
-    &:hover{
-        cursor: pointer;
-        background-color: hsl(0, 0%, 86%);
     }
 }
 
