@@ -20,7 +20,8 @@ import { ThemeService } from './services/theme.service';
 export class AppComponent implements OnInit {
   title = 'countries-api-color-switcher';
   isDarkMode = false;
- 
+  showFilters = false;
+
   // Array to store countries infos
   countries: { 
     name: string; 
@@ -72,5 +73,9 @@ export class AppComponent implements OnInit {
   toggleTheme(): void {
     const isDark = !this.themeService.currentTheme;
     this.themeService.toggleTheme(isDark);
+  }
+
+  toggleFilters(): void {
+    this.showFilters = !this.showFilters;
   }
 }

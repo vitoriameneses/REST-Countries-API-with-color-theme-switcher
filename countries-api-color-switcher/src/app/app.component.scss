@@ -1,8 +1,12 @@
-
 .toolbar{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 20px;
+
+    h2{
+        font-size: 20px;
+    }
 }
 
 button{
@@ -34,6 +38,36 @@ button{
     grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
     gap: 5px;
     width: 90%;
+}
+
+.search-filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+
+    input{
+        width: 100%;
+        border-radius: 12px;
+        max-width: 300px;
+        height: 40px;
+        padding-left: 40px;
+        margin-left: 10px;
+        margin-top: 12px;
+        background-image:url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-24.png');
+        background-position: 10px 7px;
+        background-repeat: no-repeat;
+        transition: 0.2s ease-in-out;
+        
+        &:hover{
+          cursor: pointer;
+        }
+    }
+
+    .filters{
+        position: absolute;
+        z-index: 10;
+    }
 }
 
 .grid-item{

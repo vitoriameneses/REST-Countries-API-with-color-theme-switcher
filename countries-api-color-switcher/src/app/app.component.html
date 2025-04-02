@@ -9,7 +9,16 @@
 </mat-toolbar>
 
 <div class="countries-container">
-  <div class="search-filters"></div>
+  <div class="search-filters">
+    <input type="text">
+    <div class="filters-container">
+      <button (click)="toggleFilters()">Filters</button>
+      <div *ngIf="showFilters" class="filters">
+        [filters list]
+      </div>
+    </div>
+  </div>
+
   <div class="grid-container">
     <div class="grid-item" *ngFor="let country of countries">
       <div class="flag">

@@ -47,6 +47,10 @@ $dark-theme-colors: (
     }
   }
 
+  .filters {
+    background-color: map-get($theme, primary-background);
+  }
+
   .grid-item{
     background-color: map-get($theme, secondary-background);
   }
