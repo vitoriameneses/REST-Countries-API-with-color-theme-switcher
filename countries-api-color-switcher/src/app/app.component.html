@@ -6,15 +6,15 @@
 <div class="countries-container">
   <div class="search-filters"></div>
   <div class="grid-container">
-    <div class="grid-item" *ngFor="country of countries">
+    <div class="grid-item" *ngFor="let country of countries">
       <div class="flag">
-        [flag image]
+        <img src="{{ country.flag }}" alt="">
       </div>
       <div class="infos-country">
-        <h4>[country name]</h4>
-        <p><span>Population: </span>[population]</p>
-        <p><span>Region: </span>[region]</p>
-        <p><span>Capital: </span>[capital]</p>
+        <h4>{{ country.name }}</h4>
+        <p><span>Population: </span>{{ country.population }}</p>
+        <p><span>Region: </span>{{ country.region }}</p>
+        <p><span>Capital: </span>{{ country.capital }}</p>
       </div>
     </div>
   </div>
