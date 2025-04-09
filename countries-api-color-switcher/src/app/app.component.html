@@ -10,9 +10,9 @@
 
 <div class="countries-container">
   <div class="search-filters">
-    <input type="text">
+    <input type="text" placeholder="Search for a country...">
     <div class="filters-container">
-      <button (click)="toggleFilters()">Filters</button>
+      <button class="filter" (click)="toggleFilters()">Filter by Region</button>
       <div *ngIf="showFilters" class="filters">
         [filters list]
       </div>
