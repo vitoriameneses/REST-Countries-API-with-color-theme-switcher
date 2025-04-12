@@ -37,6 +37,26 @@ export class AppComponent implements OnInit {
     currencies: string[]
   }[] = []; 
 
+  // Array to store filtered countries
+  filteredCountries: { 
+    name: string; 
+    flag: string; 
+    population: number; 
+    region: string; 
+    capital: string;
+    continents: string;
+    borders: string[];
+    languages: string[];
+    subregion: string;
+    tld: string;
+    currencies: string[]
+  }[] = []; 
+
+  regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+
+  selectedRegion: string = '';
+  searchTerm: string = '';
+
   constructor(private http: HttpClient, public themeService: ThemeService){}
 
   ngOnInit(): void {
@@ -63,6 +83,7 @@ export class AppComponent implements OnInit {
             : [],
         }));
         this.countries = [...newCountries];
+        this.filteredCountries = [...this.countries];
       },
       (error) => {
         console.log('erro: ', error);
@@ -77,5 +98,23 @@ export class AppComponent implements OnInit {
 
   toggleFilters(): void {
     this.showFilters = !this.showFilters;
+  }
+
+  selectRegion(region: string) {
+    this.selectedRegion = region;
+    this.applyFilter();
+  }
+
+  applyFilter(): void {
+    this.filteredCountries = this.countries.filter(country => {
+      const matchesRegion = this.selectedRegion ? country.region.toLowerCase() === this.selectedRegion.toLowerCase() : true;
+      return matchesRegion;
+    });
+    this.showFilters = !this.showFilters;
+  }
+
+  searchCountry(): void {
+    const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+    this.filteredCountries = this.countries.filter(country => country.name.toLowerCase().includes(lowerCaseSearchTerm));
   }
 }

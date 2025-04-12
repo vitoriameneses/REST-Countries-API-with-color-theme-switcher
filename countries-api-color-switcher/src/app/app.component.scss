@@ -44,16 +44,17 @@ button{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 90%;
 
     input{
+        border: 0.1px solid transparent;
         width: 100%;
         border-radius: 12px;
         max-width: 300px;
-        height: 40px;
+        height: 46px;
         padding-left: 40px;
         margin-left: 10px;
-        margin-top: 12px;
         background-image:url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-24.png');
         background-position: 10px 7px;
         background-repeat: no-repeat;
@@ -69,13 +70,31 @@ button{
         height: 50px;
         padding: 12px;
         padding-left: 20px;
-        box-shadow: 0px 0px 50px -22px rgba(97, 97, 97, 0.38);
-        border-radius: 12px;
+        border-radius: 8px;
+        justify-content: space-between;
     }
 
     .filters{
+        margin-top: 5px;
         position: absolute;
         z-index: 10;
+        width: 170px;
+        padding: 10px;
+        padding-left: 20px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+
+        .filter-item {
+            transition: 0.2s text-decoration ease-in-out;
+
+            &:hover{
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
     }
 }
 
